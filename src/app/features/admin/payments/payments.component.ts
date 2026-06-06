@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { DecimalPipe, DatePipe } from '@angular/common';
+import { environment } from '../../../../environments/environment';
 
 type PaymentStatus = 'PENDING' | 'CONFIRMED' | 'COMPLETED' | 'FAILED' | 'REVERSED';
 
@@ -84,7 +85,7 @@ export class PaymentsComponent implements OnInit {
   readonly payments = signal<any[]>([]);
 
   ngOnInit() {
-    this.http.get<any>('http://localhost/api/pagos/payments').subscribe({
+    this.http.get<any>(`${environment.apiUrl}/pagos/payments`).subscribe({
       next: (res) => {
         const list = res?.data ?? res;
         this.payments.set(Array.isArray(list) ? list : []);

@@ -69,9 +69,8 @@ import { AuthService } from '../../../core/auth/auth.service';
           </button>
         </form>
 
-        <p class="text-center text-sm text-gray-500 mt-6">
-          ¿No tenés cuenta?
-          <a routerLink="/auth/register" class="text-indigo-600 font-medium hover:underline">Registrate</a>
+        <p class="text-center text-xs text-gray-400 mt-6">
+          Las cuentas son creadas por el administrador del colegio.
         </p>
       </div>
     </div>

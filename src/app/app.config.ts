@@ -10,6 +10,7 @@ import * as echarts from 'echarts';
 
 import { routes } from './app.routes';
 import { authInterceptor } from './core/auth/auth.interceptor';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideApollo(() => {
       const httpLink = inject(HttpLink);
       return {
-        link: httpLink.create({ uri: 'http://localhost:8080/graphql' }),
+        link: httpLink.create({ uri: environment.graphqlUrl }),
         cache: new InMemoryCache(),
       };
     }),

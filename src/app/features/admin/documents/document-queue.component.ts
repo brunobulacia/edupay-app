@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { interval, Subscription } from 'rxjs';
 import { ErpService } from '../../../core/services/erp.service';
 import { AuthService } from '../../../core/auth/auth.service';
+import { environment } from '../../../../environments/environment';
 
 interface PendingDocument {
   id: string;
@@ -146,19 +147,31 @@ interface PendingDocument {
                     </span>
                   </td>
                   <td class="px-6 py-4 text-center">
-                    @if (doc.status === 'PENDING') {
-                      <button
-                        mat-stroked-button
-                        color="primary"
-                        class="text-xs"
-                        (click)="startReview(doc)"
-                        [attr.aria-label]="'Revisar documento de ' + doc.familyName"
+                    <div class="flex items-center justify-center gap-2">
+                      <a
+                        [href]="viewUrl(doc.fileName)"
+                        target="_blank"
+                        rel="noopener"
+                        mat-icon-button
+                        [attr.aria-label]="'Ver archivo de ' + doc.familyName"
+                        title="Ver archivo"
                       >
-                        Revisar
-                      </button>
-                    } @else {
-                      <span class="text-gray-400 text-xs">Revisado</span>
-                    }
+                        <mat-icon class="text-indigo-500">open_in_new</mat-icon>
+                      </a>
+                      @if (doc.status === 'PENDING') {
+                        <button
+                          mat-stroked-button
+                          color="primary"
+                          class="text-xs"
+                          (click)="startReview(doc)"
+                          [attr.aria-label]="'Revisar documento de ' + doc.familyName"
+                        >
+                          Revisar
+                        </button>
+                      } @else {
+                        <span class="text-gray-400 text-xs">Revisado</span>
+                      }
+                    </div>
                   </td>
                 </tr>
               } @empty {
@@ -288,6 +301,11 @@ export class DocumentQueueComponent implements OnInit, OnDestroy {
         ),
       error: () => {},
     });
+  }
+
+  viewUrl(storageKey: string): string {
+    const token = this.auth.token();
+    return `${environment.apiUrl}/documents/view?key=${encodeURIComponent(storageKey)}&token=${token}`;
   }
 
   statusClass(status: string): string {

@@ -6,8 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { RiskIndicatorComponent } from '../../../shared/components/risk-indicator/risk-indicator.component';
 import { ErpService } from '../../../core/services/erp.service';
 import { ClusterResult, RiskScore } from '../../../core/models/family.model';
+import { environment } from '../../../../environments/environment';
 
-const GW = 'http://localhost/api';
+const GW = environment.apiUrl;
 
 @Component({
   selector: 'app-reports',

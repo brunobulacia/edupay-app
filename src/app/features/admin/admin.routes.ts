@@ -28,6 +28,11 @@ export const adminRoutes: Routes = [
           import('./families/family-detail.component').then(m => m.FamilyDetailComponent),
       },
       {
+        path: 'users',
+        loadComponent: () =>
+          import('./users/users.component').then(m => m.UsersComponent),
+      },
+      {
         path: 'payments',
         loadComponent: () =>
           import('./payments/payments.component').then(m => m.PaymentsComponent),

@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { environment } from '../../../../environments/environment';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthService } from '../../../core/auth/auth.service';
 
@@ -139,7 +140,7 @@ export class ParentPaymentsComponent implements OnInit {
   }
 
   private loadPayments(familyId: string) {
-    this.http.get<any>(`http://localhost:80/api/pagos/families/${familyId}/balance`).subscribe({
+    this.http.get<any>(`${environment.apiUrl}/pagos/families/${familyId}/balance`).subscribe({
       next: (res) => {
         const data = res?.data ?? res;
         this.payments.set(data?.payments ?? []);
@@ -157,7 +158,7 @@ export class ParentPaymentsComponent implements OnInit {
     const { amount, method, dueDate } = this.form.getRawValue();
     const body = { familyId, amount, method, currency: 'BOB', dueDate };
 
-    this.http.post<any>('http://localhost:80/api/pagos/payments', body).subscribe({
+    this.http.post<any>('${environment.apiUrl}/pagos/payments', body).subscribe({
       next: (res) => {
         const payment = res?.data ?? res;
         this.payments.update(list => [payment, ...list]);

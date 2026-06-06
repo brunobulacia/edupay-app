@@ -8,7 +8,7 @@ export interface JwtPayload {
   jti: string;
   prv: string;
   role?: UserRole;
-  family_id?: string;
+  familyId?: string;
   email?: string;
   name?: string;
 }

@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { RiskIndicatorComponent } from '../../../shared/components/risk-indicator/risk-indicator.component';
 import { ErpService, FamilyFinancialStatus } from '../../../core/services/erp.service';
 import { RiskScore, ClusterResult } from '../../../core/models/family.model';
+import { environment } from '../../../../environments/environment';
 
 const MONTHS = [
   { n: 2, label: 'Feb' }, { n: 3, label: 'Mar' }, { n: 4, label: 'Abr' },
@@ -205,10 +206,10 @@ export class FamilyDetailComponent implements OnInit {
       months_active:       total,
     };
 
-    this.http.post<RiskScore>(`http://localhost:80/api/ia/families/${id}/risk-score`, riskFeatures)
+    this.http.post<RiskScore>(`${environment.apiUrl}/ia/families/${id}/risk-score`, riskFeatures)
       .subscribe({ next: r => this.risk.set(r) });
 
-    this.http.post<ClusterResult>(`http://localhost:80/api/ia/families/${id}/cluster`, clusterFeatures)
+    this.http.post<ClusterResult>(`${environment.apiUrl}/ia/families/${id}/cluster`, clusterFeatures)
       .subscribe({ next: c => this.cluster.set(c) });
   }
 }

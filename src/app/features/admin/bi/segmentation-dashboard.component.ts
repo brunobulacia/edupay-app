@@ -7,6 +7,7 @@ import { NgxEchartsDirective } from 'ngx-echarts';
 import { RiskIndicatorComponent } from '../../../shared/components/risk-indicator/risk-indicator.component';
 import { ErpService, FamilyInfo, FamilyFinancialStatus } from '../../../core/services/erp.service';
 import { ClusterResult, RiskScore } from '../../../core/models/family.model';
+import { environment } from '../../../../environments/environment';
 import type { EChartsOption } from 'echarts';
 
 interface FamilySegment {
@@ -223,10 +224,10 @@ export class SegmentationDashboardComponent implements OnInit {
         months_active:       totalMonths,
       };
 
-      this.http.post<RiskScore>(`http://localhost:80/api/ia/families/${family.id}/risk-score`, riskFeatures)
+      this.http.post<RiskScore>(`${environment.apiUrl}/ia/families/${family.id}/risk-score`, riskFeatures)
         .subscribe({ next: r => seg.risk = r });
 
-      this.http.post<ClusterResult>(`http://localhost:80/api/ia/families/${family.id}/cluster`, clusterFeatures)
+      this.http.post<ClusterResult>(`${environment.apiUrl}/ia/families/${family.id}/cluster`, clusterFeatures)
         .subscribe({
           next: c => seg.cluster = c,
           complete: () => {

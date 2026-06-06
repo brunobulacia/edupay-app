@@ -4,6 +4,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../../core/auth/auth.service';
+import { environment } from '../../../../environments/environment';
 
 type PaymentStatus = 'PENDING' | 'CONFIRMED' | 'REVERSED';
 
@@ -72,7 +73,7 @@ export class PaymentHistoryComponent implements OnInit {
     const familyId = this.auth.familyId();
     if (!familyId) { this.loading.set(false); return; }
 
-    this.http.get<any>(`http://localhost:80/api/pagos/families/${familyId}/balance`).subscribe({
+    this.http.get<any>(`${environment.apiUrl}/pagos/families/${familyId}/balance`).subscribe({
       next: res => {
         const data = res?.data ?? res;
         const list: any[] = data?.payments ?? [];

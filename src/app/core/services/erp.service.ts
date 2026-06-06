@@ -131,6 +131,18 @@ const REVIEW_DOCUMENT_MUTATION = gql`
   }
 `;
 
+const LIST_FAMILIES_QUERY = gql`
+  query ListFamilies {
+    listFamilies {
+      id
+      externalId
+      tutorName
+      tutorEmail
+      active
+    }
+  }
+`;
+
 const LIST_DOCUMENTS_QUERY = gql`
   query ListDocuments($status: String) {
     listDocuments(status: $status) {
@@ -211,6 +223,15 @@ export class ErpService {
         variables: { input },
       })
       .pipe(map((r) => r.data!.reviewDocument));
+  }
+
+  listFamilies() {
+    return this.apollo
+      .query<{ listFamilies: FamilyInfo[] }>({
+        query: LIST_FAMILIES_QUERY,
+        fetchPolicy: 'network-only',
+      })
+      .pipe(map((r) => r.data!.listFamilies));
   }
 
   listDocuments(status?: string) {

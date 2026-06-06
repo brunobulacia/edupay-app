@@ -100,11 +100,12 @@ export class AdminLayoutComponent {
   readonly collapsed = signal(false);
 
   readonly navItems: NavItem[] = [
-    { label: 'Dashboard', icon: 'dashboard', route: '/admin/dashboard' },
-    { label: 'Familias', icon: 'family_restroom', route: '/admin/families' },
-    { label: 'Pagos', icon: 'payments', route: '/admin/payments' },
-    { label: 'Documentos', icon: 'folder_open', route: '/admin/documents' },
-    { label: 'BI Dashboards', icon: 'bar_chart', route: '/admin/bi' },
-    { label: 'IA / Reportes', icon: 'psychology', route: '/admin/reports' },
+    { label: 'Dashboard',     icon: 'dashboard',       route: '/admin/dashboard' },
+    { label: 'Familias',      icon: 'family_restroom', route: '/admin/families' },
+    { label: 'Usuarios',      icon: 'manage_accounts', route: '/admin/users' },
+    { label: 'Pagos',         icon: 'payments',        route: '/admin/payments' },
+    { label: 'Documentos',    icon: 'folder_open',     route: '/admin/documents' },
+    { label: 'BI Dashboards', icon: 'bar_chart',       route: '/admin/bi' },
+    { label: 'IA / Reportes', icon: 'psychology',      route: '/admin/reports' },
   ];
 }

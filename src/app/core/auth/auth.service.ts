@@ -4,9 +4,10 @@ import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { jwtDecode } from 'jwt-decode';
 import { AuthResponse, JwtPayload, UserRole } from '../models/user.model';
+import { environment } from '../../../environments/environment';
 
 const TOKEN_KEY = 'edupay_token';
-const API = 'http://localhost:80/api';
+const API = environment.apiUrl;
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -36,7 +37,7 @@ export class AuthService {
   readonly role = computed<UserRole | null>(() => this.payload()?.role ?? null);
   readonly isAdmin = computed(() => this.role() === 'ADMIN');
   readonly isParent = computed(() => this.role() === 'PARENT');
-  readonly familyId = computed(() => this.payload()?.family_id ?? null);
+  readonly familyId = computed(() => this.payload()?.familyId ?? null);
   readonly userName = computed(() => this.payload()?.name ?? this.payload()?.email ?? null);
 
   login(email: string, password: string) {
